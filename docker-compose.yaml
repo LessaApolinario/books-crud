@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+  app:
+    build:
+      context: .
+    container_name: app
+    entrypoint: echo "Implement me"
+    tty: true
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    # Implement me
+
+networks:
+  app-network:
+    driver: bridge
