@@ -22,8 +22,8 @@ class AuthorService extends AuthorUseCase {
     return this.adapter.update(author, id);
   }
 
-  remove(id: string): Promise<boolean> {
-    return this.adapter.remove(id);
+  deleteAuthor(id: string): Promise<boolean> {
+    return this.adapter.deleteAuthor(id);
   }
 }
 

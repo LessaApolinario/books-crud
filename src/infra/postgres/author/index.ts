@@ -29,7 +29,7 @@ class AuthorPostgresRepository
     throw new Error('Method not implemented.');
   }
 
-  async remove(id: string): Promise<boolean> {
+  async deleteAuthor(id: string): Promise<boolean> {
     const client = await this.connect();
     const result = await client.query('DELETE FROM author WHERE id = $1;', [
       id,
