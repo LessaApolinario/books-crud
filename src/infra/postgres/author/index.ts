@@ -29,8 +29,13 @@ class AuthorPostgresRepository
     throw new Error('Method not implemented.');
   }
 
-  remove(id: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async remove(id: string): Promise<boolean> {
+    const client = await this.connect();
+    const result = await client.query('DELETE FROM author WHERE id = $1;', [
+      id,
+    ]);
+    this.release();
+    return result.rowCount > 0;
   }
 }
 

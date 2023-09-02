@@ -11,6 +11,7 @@ class AuthorHandler {
     this.usecase = usecase;
     this.create = this.create.bind(this);
     this.fetch = this.fetch.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   async create(
@@ -40,6 +41,26 @@ class AuthorHandler {
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).send({ message: error.message });
+      }
+    }
+  }
+
+  async delete(
+    req: Request<{}, {}, AuthorRequestParameters>,
+    res: Response<Message, {}>
+  ) {
+    try {
+      const { id } = req.body;
+
+      if (!!id) {
+        await this.usecase.remove(id);
+        res.status(200).send({ message: 'Author deleted successfully' });
+      } else {
+        res.status(400).send({ message: 'id must be provided' });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: 'Could not delete an author' });
       }
     }
   }

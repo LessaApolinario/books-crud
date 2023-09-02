@@ -7,6 +7,7 @@ function loadRoutes(usecase: AuthorUseCase) {
   const handler = new AuthorHandler(usecase);
   router.get('/', handler.fetch);
   router.post('/create', handler.create);
+  router.delete('/delete', handler.delete);
   return router;
 }
 
