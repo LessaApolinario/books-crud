@@ -19,8 +19,13 @@ class BasePostgresRepository {
     return await this._client.connect();
   }
 
-  async close() {
-    await this._client.end();
+  release() {
+    this._client.on('release', (err, client) => {
+      if (err) {
+        throw err;
+      }
+      client.release();
+    });
   }
 }
 

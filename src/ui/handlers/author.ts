@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { AuthorRequestParameters } from '../../core/domain/types/AuthorRequestParameters';
+import { Message } from '../../core/domain/types/Message';
 import AuthorUseCase from '../../core/interfaces/usecases/AuthorUseCase';
 
 class AuthorHandler {
@@ -7,7 +9,28 @@ class AuthorHandler {
 
   constructor(usecase: AuthorUseCase) {
     this.usecase = usecase;
+    this.create = this.create.bind(this);
     this.fetch = this.fetch.bind(this);
+  }
+
+  async create(
+    req: Request<{}, {}, AuthorRequestParameters>,
+    res: Response<Message, {}>
+  ) {
+    try {
+      const { author } = req.body;
+
+      if (!!author) {
+        await this.usecase.create(author);
+        res.status(201).send({ message: 'Autor criado com sucesso' });
+      } else {
+        res.status(400).send({ message: 'Erro ao criar autor' });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: error.message });
+      }
+    }
   }
 
   async fetch(req: Request, res: Response) {
@@ -16,7 +39,7 @@ class AuthorHandler {
       res.status(200).json(authors);
     } catch (error) {
       if (error instanceof Error) {
-        res.status(400).send({ error: error.message });
+        res.status(400).send({ message: error.message });
       }
     }
   }

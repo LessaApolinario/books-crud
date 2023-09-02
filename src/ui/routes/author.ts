@@ -6,6 +6,7 @@ function loadRoutes(usecase: AuthorUseCase) {
   const router = express.Router();
   const handler = new AuthorHandler(usecase);
   router.get('/', handler.fetch);
+  router.post('/create', handler.create);
   return router;
 }
 
