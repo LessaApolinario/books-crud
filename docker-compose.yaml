@@ -6,19 +6,34 @@ services:
     build:
       context: .
     container_name: app
-    entrypoint: echo "Implement me"
     tty: true
     networks:
       - app-network
     volumes:
-      - .:/app
+      - .:/usr/app
     ports:
       - "8000:8000"
+      - "7000:7000"
     depends_on:
       - db
 
   db:
-    # Implement me
+    image: postgres:15.4
+    container_name: db
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
 
 networks:
   app-network:

@@ -8,3 +8,6 @@ I made this simple application to document my learning in docker.
 ## The Entity Relationship Model used
 
 ![ERD](./docs/Books.jpeg)
+
+## Como testar?
+Use o comando a seguir no terminal: `docker-compose --env-file .env up -d`

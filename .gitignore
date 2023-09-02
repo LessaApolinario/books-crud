@@ -1,3 +1,4 @@
 node_modules
-.env.local
+.env
 yarn-error.log
+postgres-data
