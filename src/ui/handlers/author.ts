@@ -11,6 +11,7 @@ class AuthorHandler {
     this.usecase = usecase;
     this.create = this.create.bind(this);
     this.fetch = this.fetch.bind(this);
+    this.update = this.update.bind(this);
     this.deleteAuthor = this.deleteAuthor.bind(this);
   }
 
@@ -23,13 +24,13 @@ class AuthorHandler {
 
       if (!!author) {
         await this.usecase.create(author);
-        res.status(201).send({ message: 'Autor criado com sucesso' });
+        res.status(201).send({ message: 'Author created successfully' });
       } else {
-        res.status(400).send({ message: 'Erro ao criar autor' });
+        res.status(400).send({ message: 'Author must be provided' });
       }
     } catch (error) {
       if (error instanceof Error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send({ message: 'Could not create an author' });
       }
     }
   }
@@ -40,7 +41,27 @@ class AuthorHandler {
       res.status(200).json(authors);
     } catch (error) {
       if (error instanceof Error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send({ message: 'Could not fetch authors' });
+      }
+    }
+  }
+
+  async update(
+    req: Request<{}, {}, AuthorRequestParameters>,
+    res: Response<Message, {}>
+  ) {
+    try {
+      const { author } = req.body;
+
+      if (!!author && !!author.id) {
+        await this.usecase.update(author, author.id);
+        res.status(200).send({ message: 'Author updated successfully' });
+      } else {
+        res.status(400).send({ message: 'Author must be provided' });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(400).send({ message: 'Could not update an author' });
       }
     }
   }

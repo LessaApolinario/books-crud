@@ -25,8 +25,14 @@ class AuthorPostgresRepository
     return result.rows.map(Author.fromJSON);
   }
 
-  update(author: Author, id: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async update(author: Author, id: string): Promise<boolean> {
+    const client = await this.connect();
+    const result = await client.query(
+      'UPDATE author SET name = $1, updated_at = $2 WHERE id = $3;',
+      [author.name, new Date(), id]
+    );
+    this.release();
+    return result.rowCount > 0;
   }
 
   async deleteAuthor(id: string): Promise<boolean> {
