@@ -11,7 +11,7 @@ class AuthorHandler {
     this.usecase = usecase;
     this.create = this.create.bind(this);
     this.fetch = this.fetch.bind(this);
-    this.delete = this.delete.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   async create(
@@ -45,7 +45,7 @@ class AuthorHandler {
     }
   }
 
-  async delete(
+  async remove(
     req: Request<{}, {}, AuthorRequestParameters>,
     res: Response<Message, {}>
   ) {
