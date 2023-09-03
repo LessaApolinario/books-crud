@@ -60,11 +60,11 @@ class Book {
     return this._released;
   }
 
-  get createdAt() {
+  get created_at() {
     return this._created_at;
   }
 
-  get updatedAt() {
+  get updated_at() {
     return this._updated_at;
   }
 }
