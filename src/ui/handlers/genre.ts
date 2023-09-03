@@ -29,7 +29,7 @@ class GenreHandler {
         res.status(400).send({ message: 'Genre must be provided' });
       }
     } catch (error) {
-      res.status(400).send({ message: 'Could not create an genre' });
+      res.status(400).send({ message: 'Could not create a genre' });
     }
   }
 
@@ -38,7 +38,7 @@ class GenreHandler {
       const genres = await this.usecase.fetch();
       res.status(200).json(genres);
     } catch (error) {
-      res.status(400).send({ message: 'Could not fetch genre' });
+      res.status(400).send({ message: 'Could not fetch genres' });
     }
   }
 
@@ -56,7 +56,7 @@ class GenreHandler {
         res.status(400).send({ message: 'Genre must be provided' });
       }
     } catch (error) {
-      res.status(400).send({ message: 'could not update an genre' });
+      res.status(400).send({ message: 'could not update a genre' });
     }
   }
 
@@ -74,7 +74,7 @@ class GenreHandler {
         res.status(400).send({ message: 'id must be provided' });
       }
     } catch (error) {
-      res.status(400).send({ message: 'Could not delete an genre' });
+      res.status(400).send({ message: 'Could not delete a genre' });
     }
   }
 }
