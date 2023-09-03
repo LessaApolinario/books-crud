@@ -9,5 +9,5 @@ I made this simple application to document my learning in docker.
 
 ![ERD](./docs/Books.jpeg)
 
-## Como testar?
-Use o comando a seguir no terminal: `docker-compose --env-file .env up -d`
+## How to run?
+Use the following command in the terminal to start the containers: `docker-compose --env-file .env up -d`
