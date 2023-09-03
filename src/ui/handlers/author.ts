@@ -29,9 +29,7 @@ class AuthorHandler {
         res.status(400).send({ message: 'Author must be provided' });
       }
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(400).send({ message: 'Could not create an author' });
-      }
+      res.status(400).send({ message: 'Could not create an author' });
     }
   }
 
@@ -40,9 +38,7 @@ class AuthorHandler {
       const authors = await this.usecase.fetch();
       res.status(200).json(authors);
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(400).send({ message: 'Could not fetch authors' });
-      }
+      res.status(400).send({ message: 'Could not fetch authors' });
     }
   }
 
@@ -60,9 +56,7 @@ class AuthorHandler {
         res.status(400).send({ message: 'Author must be provided' });
       }
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(400).send({ message: 'Could not update an author' });
-      }
+      res.status(400).send({ message: 'Could not update an author' });
     }
   }
 
@@ -80,9 +74,7 @@ class AuthorHandler {
         res.status(400).send({ message: 'id must be provided' });
       }
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(400).send({ message: 'Could not delete an author' });
-      }
+      res.status(400).send({ message: 'Could not delete an author' });
     }
   }
 }
