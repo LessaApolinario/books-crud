@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { BookRequestParameters } from '../../core/domain/types/BookRequestParameters';
+import { BookRequestParameters } from '../../core/domain/types/params/BookRequestParameters';
 import { Message } from '../../core/domain/types/Message';
 import BookUseCase from '../../core/interfaces/usecases/BookUseCase';
 

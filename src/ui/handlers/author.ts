@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { AuthorRequestParameters } from '../../core/domain/types/AuthorRequestParameters';
+import { AuthorRequestParameters } from '../../core/domain/types/params/AuthorRequestParameters';
 import { Message } from '../../core/domain/types/Message';
 import AuthorUseCase from '../../core/interfaces/usecases/AuthorUseCase';
 

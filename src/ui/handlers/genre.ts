@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { GenreRequestParameters } from '../../core/domain/types/GenreRequestParameters';
+import { GenreRequestParameters } from '../../core/domain/types/params/GenreRequestParameters';
 import { Message } from '../../core/domain/types/Message';
 import GenreUseCase from '../../core/interfaces/usecases/GenreUseCase';
 

@@ -21,6 +21,7 @@ class BookPostgresRepository
   async fetch(): Promise<Book[]> {
     const client = await this.connect();
     const result = await client.query('SELECT * FROM book;');
+    this.release();
     return result.rows.map(Book.fromJSON);
   }
 
@@ -30,12 +31,14 @@ class BookPostgresRepository
       'UPDATE book SET title = $1, pages = $2, updated_at = $3 WHERE id = $4;',
       [book.title, book.pages, new Date(), id]
     );
+    this.release();
     return result.rowCount > 0;
   }
 
   async deleteBook(id: string): Promise<boolean> {
     const client = await this.connect();
     const result = await client.query('DELETE FROM book WHERE id = $1;', [id]);
+    this.release();
     return result.rowCount > 0;
   }
 }
