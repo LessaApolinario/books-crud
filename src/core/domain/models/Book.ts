@@ -1,17 +1,14 @@
 import { uuid } from 'uuidv4';
 
-import Author from './Author';
-import Genre from './Genre';
+import { DTO } from '../types/DTO';
 
 class Book {
   private _id?: string;
   private _title?: string;
-  private _authors?: Author[];
-  private _genres?: Genre[];
   private _pages?: number;
   private _released?: Date;
-  private _createdAt?: Date;
-  private _updatedAt?: Date;
+  private _created_at?: Date;
+  private _updated_at?: Date;
 
   constructor() {
     if (!this._id) {
@@ -19,12 +16,32 @@ class Book {
     }
 
     this._title = '';
-    this._authors = undefined;
-    this._genres = undefined;
     this._pages = 0;
     this._released = undefined;
-    this._createdAt = undefined;
-    this._updatedAt = undefined;
+    this._created_at = undefined;
+    this._updated_at = undefined;
+  }
+
+  static fromJSON(json: DTO): Book {
+    const book = new Book();
+    book._id = String(json['id']);
+    book._title = String(json['title']);
+    book._pages = Number(json['pages']);
+    book._released = new Date(json['released'] as string);
+    book._created_at = new Date(json['created_at'] as string);
+    book._updated_at = new Date(json['updated_at'] as string);
+    return book;
+  }
+
+  toJSON(): DTO {
+    const dto: DTO = {};
+    dto['id'] = this._id;
+    dto['title'] = this._title;
+    dto['pages'] = this._pages;
+    dto['released'] = this._released;
+    dto['created_at'] = this._created_at;
+    dto['updated_at'] = this._updated_at;
+    return dto;
   }
 
   get id() {
@@ -33,14 +50,6 @@ class Book {
 
   get title() {
     return this._title;
-  }
-
-  get authors() {
-    return this._authors;
-  }
-
-  get genres() {
-    return this._genres;
   }
 
   get pages() {
@@ -52,11 +61,11 @@ class Book {
   }
 
   get createdAt() {
-    return this._createdAt;
+    return this._created_at;
   }
 
   get updatedAt() {
-    return this._updatedAt;
+    return this._updated_at;
   }
 }
 
